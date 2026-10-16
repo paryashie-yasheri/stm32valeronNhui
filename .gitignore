@@ -1,0 +1,24 @@
+# STM32CubeIDE / Eclipse workspace state
+/.metadata/
+**/.metadata/
+
+# Build output (ELF, objects, generated makefiles, listings, maps)
+**/Debug/
+**/Release/
+**/build/
+**/Build/
+*.o
+*.d
+*.elf
+*.hex
+*.bin
+*.map
+*.list
+*.su
+
+# Local editor and OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~

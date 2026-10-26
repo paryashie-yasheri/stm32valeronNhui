@@ -6,7 +6,14 @@
 - SDK-1.1M with the STM32F427VITx processor module.
 - USB cable connected to the board's **DBG USB** connector.
 
-The current program blinks the green LED on PD13 every 500 ms.
+Select the exercise with `assignment_part` in `lab1/Src/main.c`: `1` or `2` (the default).
+
+- Part 1 runs four LED sequences. Press the PC15 button to change sequences.
+- Part 2 adds serial commands and four custom sequence slots. Connect to USART6 (PC6 TX, PC7 RX) at 38400 baud, 8 data bits, no parity, one stop bit, and no flow control.
+
+For part 2, send `set 1` through `set 8` to select a saved sequence. Send `new gryn`, then `fast`, `medium`, or `slow` when prompted. The letters mean green, red, yellow, and off; sequences accept 2–8 letters. Custom sequences occupy slots 5–8 and then wrap around. Use `set interrupts on` or `set interrupts off` to choose interrupt or polling button handling.
+
+Read `main.c` first for startup, then `part1.c` or `part2.c` for the application. `lab1/Inc/board.h` holds hardware addresses and pin constants. A register pointer refers to a hardware control value; reading or writing through it accesses the peripheral. `volatile` makes those accesses happen even when the compiler optimizes the code. `SysTick_Handler` runs every millisecond and increments `system_millis`, allowing the main loop to measure time without stopping to wait.
 
 ## Open and build
 
@@ -19,7 +26,7 @@ The current program blinks the green LED on PD13 every 500 ms.
 1. Open **Run → Debug Configurations…** and create an **STM32 Cortex-M C/C++ Application** configuration for `lab1`.
 2. On the **Debugger** tab, select **ST-LINK (OpenOCD)** and set **Configuration Script** to **User Defined**.
 3. Browse to `lab1/SDK1_1_M FTDBG.cfg` and apply the configuration.
-4. Click **Debug**. When execution stops at `main`, press **Resume (F8)**. The green LED should blink.
+4. Click **Debug**. When execution stops at `main`, press **Resume (F8)**. The selected LED sequence should start.
 
 The OpenOCD files `lab1/SDK1_1_M FTDBG.cfg` and `lab1/SDK11M_FT.cfg` configure the SDK-1.1M's built-in FTDI JTAG debugger for STM32F427.
 
